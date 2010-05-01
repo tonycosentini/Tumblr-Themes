@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>Endless While Loop</title>
+	
+	<style type="text/css" media="screen">
+	 html, body, div, span, applet, object, iframe,
+   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+   a, abbr, acronym, address, big, cite, code,
+   del, dfn, em, font, img, ins, kbd, q, s, samp,
+   small, strike, strong, sub, sup, tt, var,
+   b, u, i, center,
+   dl, dt, dd, ol, ul, li,
+   fieldset, form, label, legend,
+   table, caption, tbody, tfoot, thead, tr, th, td {
+   	margin: 0;
+   	padding: 0;
+   	border: 0;
+   	outline: 0;
+   	font-size: 100%;
+   	vertical-align: baseline;
+   	background: transparent;
+   }
+   body {
+   	line-height: 1;
+   }
+   ol, ul {
+   	list-style: none;
+   }
+   blockquote, q {
+   	quotes: none;
+   }
+   blockquote:before, blockquote:after,
+   q:before, q:after {
+   	content: '';
+   	content: none;
+   }
+
+   /* remember to define focus styles! */
+   :focus {
+   	outline: 0;
+   }
+
+   /* remember to highlight inserts somehow! */
+   ins {
+   	text-decoration: none;
+   }
+   del {
+   	text-decoration: line-through;
+   }
+
+   /* tables still need 'cellspacing="0"' in the markup */
+   table {
+   	border-collapse: collapse;
+   	border-spacing: 0;
+   }
+   
+/*   End Rest*/
+   
+   body {
+     background-image: url('http://endlesswhileloop.com/background.gif');
+   }
+   
+   #box {
+     width: 800px;
+     margin-left: auto;
+     margin-right: auto;
+     margin-top: 40px;
+     padding: 20px;
+     background: #FFFFFF;
+     -moz-border-radius: 10px; -webkit-border-radius: 10px;
+     overflow: auto;
+   }
+   
+   h1 {
+     font-size: 24pt;
+     font-family: Helvetica;
+     padding-bottom: 6px;
+     color: #333333;
+     border-bottom: 4px solid #333333;
+     text-shadow: #88ccff 2px 2px;
+     margin-bottom: 8px;
+   }
+   
+   h2 {
+     font-size: 18pt;
+     font-family: Helvetica;
+     padding-bottom: 4px;
+     color: #333333;
+     border-bottom: 4px solid #333333;
+     text-shadow: #88ccff 2px 2px;
+     margin-bottom: 8px;
+   }
+   
+   h3 {
+     font-size: 14pt;
+     font-family: Helvetica;
+     padding-bottom: 4px;
+     color: #333333;
+     border-bottom: 1px dotted #333333;
+     text-shadow: #88ccff 2px 2px;
+     margin-bottom: 8px;
+   }
+   
+   h2 a {
+    text-decoration: none;
+   }
+   
+   #content, #sidebar {
+     font-family:Arial;
+     font-size: 11pt;
+     line-height: 14pt;
+   }
+   
+   #content {
+    float: left;
+    width: 560px;
+    border-right: 1px dotted #333333;
+    padding-right: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+   }
+   
+   #sidebar {
+      width: 200px;
+    float: right;
+    padding: 8px;
+   }
+   
+   dt {
+     margin:8px 0px;
+   }
+   
+   dt a {
+    font-size: 12pt;
+    font-family: Helvetica;
+    color: #333333;
+    font-weight: bold;
+    text-decoration: none;
+   }
+   
+   dt a:hover {
+     background: #88ccff;
+   }
+	
+	dd {
+	  font-family: Arial;
+	  font-size: 10pt;
+	}
+	
+	a {
+	  color: #333;
+	}
+	
+	.post {
+	  margin-bottom: 20px;
+	}
+	</style>
+	
+</head>
+
+<body>
+
+  <div id="box">
+    <h1>{Title}</h1>
+    <div id="content">
+      {block:Posts}
+        <div class="post">
+        {block:Text}
+                {block:Title}
+                    <h2><a href="{Permalink}">{Title}</a></h2>
+                {/block:Title}
+
+                {Body}
+        {/block:Text}
+        
+        {block:Photo}
+            {block:Caption}
+              <h2><a href="{Permalink}">{Caption}</a></h2>
+            {/block:Caption}
+        
+            <img src="{PhotoURL-500}" alt="{PhotoAlt}"/>
+
+        {/block:Photo}
+        
+        {block:Photoset}
+            {block:Caption}
+              <h2><a href="{Permalink}">{Caption}</a></h2>
+            {/block:Caption}
+          
+            {Photoset-500}
+
+        {/block:Photoset}
+        
+        </div>
+      {/block:Posts}
+    </div>
+    <div id="sidebar">
+          <h3>Welcome</h3>
+          <strong>You've reached reached the personal site of Tony Cosentini, an undergraduate computer science student at Temple University. <br/><br/>Feel free to browse around and see what I've been up to lately.</strong>
+          <br/><br/>
+        <h3>Recent Projects</h3>
+          <dl>
+            <dt><a href="http://phillyconcerthub.com">Philadelphia Concert Hub</a></dt>
+            <dd>Web application for finding concerts in Philadelphia.</dd>
+
+            <dt><a href="http://phillyconcerthub.com/iphone">Philadelphia Concert Hub for iPhone OS</a></dt>
+            <dd>iPhone application for finding concerts in Philadelphia</dd>
+
+            <dt><a href="http://tonyc.tumblr.com">The Scoop</a></dt>
+            <dd>(Rarely updated) Tumblr</dd>
+          </dl>
+          <br/><br/>
+        <h3>Contact</h3>
+          Email/Google Talk: <a href="mailto:tony@endlesswhileloop.com">tony@endlesswhileloop.com</a> 
+      <br/>
+          Twitter: <a href="http://twitter.com/tonyc">@tonyc</a> or <a href="http://twitter.com/phillyconcerts">@PhillyConcerts</a>
+    </div>
+  </div>
+
+</body>
+</html>
