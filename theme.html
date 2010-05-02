@@ -5,35 +5,38 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-	<title>Endless While Loop</title>
+	<title>{Title}</title>
 	
 	<style type="text/css" media="screen">
-	 html, body, div, span, applet, object, iframe,
-   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-   a, abbr, acronym, address, big, cite, code,
-   del, dfn, em, font, img, ins, kbd, q, s, samp,
-   small, strike, strong, sub, sup, tt, var,
-   b, u, i, center,
-   dl, dt, dd, ol, ul, li,
-   fieldset, form, label, legend,
-   table, caption, tbody, tfoot, thead, tr, th, td {
-   	margin: 0;
-   	padding: 0;
-   	border: 0;
-   	outline: 0;
-   	font-size: 100%;
-   	vertical-align: baseline;
-   	background: transparent;
-   }
-   body {
-   	line-height: 1;
-   }
-   ol, ul {
-   	list-style: none;
-   }
-   blockquote, q {
-   	quotes: none;
-   }
+	html, body, div, span, applet, object, iframe,
+	h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+	a, abbr, acronym, address, big, cite, code,
+	del, dfn, em, font, img, ins, kbd, q, s, samp,
+	small, strike, strong, sub, sup, tt, var,
+ 	b, u, i, center,
+ 	dl, dt, dd, ol, ul, li,
+	fieldset, form, label, legend,
+	table, caption, tbody, tfoot, thead, tr, th, td {
+   		margin: 0;
+   		padding: 0;
+   		border: 0;
+   		outline: 0;
+   		font-size: 100%;
+   		vertical-align: baseline;
+   		background: transparent;
+   	}
+   
+	body {
+   		line-height: 1;
+   	}
+   
+	ol, ul {
+   		list-style: none;
+   	}
+   
+	blockquote, q {
+   		quotes: none;
+   	}
    blockquote:before, blockquote:after,
    q:before, q:after {
    	content: '';
@@ -70,10 +73,12 @@
      margin-left: auto;
      margin-right: auto;
      margin-top: 40px;
+     margin-bottom: 40px;
      padding: 20px;
      background: #FFFFFF;
      -moz-border-radius: 10px; -webkit-border-radius: 10px;
-     overflow: auto;
+     position: relative;
+     left: 20px;
    }
    
    h1 {
@@ -85,13 +90,17 @@
      text-shadow: #88ccff 2px 2px;
      margin-bottom: 8px;
    }
+
+	h1 a {
+		text-decoration: none;
+	}
    
    h2 {
      font-size: 18pt;
+     line-height: 24pt;
      font-family: Helvetica;
      padding-bottom: 4px;
      color: #333333;
-     border-bottom: 4px solid #333333;
      text-shadow: #88ccff 2px 2px;
      margin-bottom: 8px;
    }
@@ -105,6 +114,10 @@
      text-shadow: #88ccff 2px 2px;
      margin-bottom: 8px;
    }
+
+	#content h3 {
+		border-bottom: none;
+	}
    
    h2 a {
     text-decoration: none;
@@ -123,13 +136,13 @@
     padding-right: 8px;
     padding-top: 8px;
     padding-bottom: 8px;
+	height: 100%;
    }
    
    #sidebar {
-      width: 200px;
+    width: 220px;
     float: right;
-    padding: 8px;
-   }
+	}
    
    dt {
      margin:8px 0px;
@@ -141,10 +154,22 @@
     color: #333333;
     font-weight: bold;
     text-decoration: none;
+  -webkit-transition: -webkit-transform 2s ease-in-out;
+   }
+   
+   h4 {
+    font-size: 15pt;
+    font-family: Helvetica;
+    color: #333333;
+    font-weight: bold;
+    text-decoration: none;
+    margin-top: 8px;
    }
    
    dt a:hover {
      background: #88ccff;
+	 padding: 4px;
+	-webkit-border-radius: 2px;
    }
 	
 	dd {
@@ -157,8 +182,48 @@
 	}
 	
 	.post {
-	  margin-bottom: 20px;
+	  padding-bottom: 30px;
+	  margin-bottom: 30px;
+    border-bottom: 1px dotted #333333;
 	}
+	
+	.gist {
+	  font-size: 8pt;
+	}
+	
+	#pagination {
+    text-align: center;
+    padding: 20px;
+    font-family: Helvetica;
+    font-weight: bold;
+    font-size: 18pt;
+  }
+  
+  .date {
+    font-family: Helvetica;
+    font-size: 16px;
+    padding: 10px;
+    font-weight: bold;
+   position: relative;
+    left: -90px;
+    top: -10px;
+    background: #FFF;
+    width: 60px;
+    float: left;
+    -moz-border-radius-topleft: 10px;
+    -webkit-border-top-left-radius: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    text-align: right;
+    z-index: 2;
+    margin-right: -100%;
+  }
+  
+	.spacer {
+		clear: both;
+		height: 1px;
+	}
+
 	</style>
 	
 </head>
@@ -166,9 +231,22 @@
 <body>
 
   <div id="box">
-    <h1>{Title}</h1>
+    <h1><a href="/">{Title}</a></h1>
     <div id="content">
       {block:Posts}
+      
+        {block:NewDayDate}
+            <div class="date">
+              <a href="{Permalink}">{ShortMonth} {DayOfMonth}</a><br/>
+            </div>
+        {/block:NewDayDate}
+        
+        {block:SameDayDate}
+            <div class="date">
+              <a href="{Permalink}">+</a><br/>
+            </div>
+        {/block:SameDayDate}  
+      
         <div class="post">
         {block:Text}
                 {block:Title}
@@ -178,13 +256,15 @@
                 {Body}
         {/block:Text}
         
-        {block:Photo}
+        {block:Photo}        
+            <div align="center">
+              <img src="{PhotoURL-500}" alt="{PhotoAlt}"/>
+            </div>
+            
             {block:Caption}
-              <h2><a href="{Permalink}">{Caption}</a></h2>
+              <h4><a href="{Permalink}">{Caption}</a></h4>
             {/block:Caption}
-        
-            <img src="{PhotoURL-500}" alt="{PhotoAlt}"/>
-
+            
         {/block:Photo}
         
         {block:Photoset}
@@ -196,9 +276,107 @@
 
         {/block:Photoset}
         
+        {block:Quote}
+          <h4>"{Quote}"</h4>
+
+          {block:Source}
+              <div class="source">{Source}</div>
+          {/block:Source}
+        {/block:Quote}
+        
+        {block:Link}
+          <h4><a href="{URL}" class="link" {Target}>{Name}</a></h4>
+
+          {block:Description}
+              <div class="description">{Description}</div>
+          {/block:Description}
+        {/block:Link}
+        
+        {block:Chat}
+          {block:Title}
+              <h3><a href="{Permalink}">{Title}</a></h3>
+          {/block:Title}
+
+          <ul class="chat">
+              {block:Lines}
+                  <li class="{Alt} user_{UserNumber}">
+                      {block:Label}
+                          <span class="label">{Label}</span>
+                      {/block:Label}
+
+                      {Line}
+                  </li>
+              {/block:Lines}
+          </ul>
+        {/block:Chat}
+
+        {block:Video}
+          {Video-500}
+
+          {block:Caption}
+              <h4>{Caption}</h4>
+          {/block:Caption}
+        {/block:Video}
+
+        {block:Audio}
+          {AudioPlayerGrey}
+
+          {block:Caption}
+              <h4>{Caption}</h4>
+          {/block:Caption}
+        {/block:Audio}
+        
         </div>
+		
+		{block:PostNotes}
+			<h3>Notes</h3>
+			{PostNotes}
+			<br>
+		{/block:PostNotes}
+		
+		{block:PermalinkPage}
+		<script type="text/javascript">var disqus_url = "{Permalink}"; var disqus_title ="{block:PostTitle}{PostTitle}{/block:PostTitle}";</script>{block:Permalink}<div id="disqus_thread"></div>
+		<script type="text/javascript">
+		  /**
+		    * var disqus_identifier; [Optional but recommended: Define a unique identifier (e.g. post id or slug) for this thread] 
+		    */
+		  (function() {
+		   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		   dsq.src = 'http://thescoop.disqus.com/embed.js';
+		   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		  })();
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=thescoop">comments powered by Disqus.</a></noscript>
+		<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+		{/block:Permalink}<script type="text/javascript">
+		//<![CDATA[
+		(function() {
+			var links = document.getElementsByTagName('a');
+			var query = '?';
+			for(var i = 0; i < links.length; i++) {
+			if(links[i].href.indexOf('#disqus_thread') >= 0) {
+				query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+			}
+			}
+			document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/thescoop/get_num_replies.js' + query + '"></' + 'script>');
+		})();
+		//]]>
+		</script>
+		{/block:PermalinkPage}
+
       {/block:Posts}
+      
+      <div id="pagination">
+        {block:PreviousPage}
+          <a href="{PreviousPage}">&laquo; Previous</a>
+        {/block:PreviousPage}
+        {block:NextPage}
+          <a href="{NextPage}">Next &raquo;</a>
+        {/block:NextPage}
+      </div>
+      
     </div>
+
     <div id="sidebar">
           <h3>Welcome</h3>
           <strong>You've reached reached the personal site of Tony Cosentini, an undergraduate computer science student at Temple University. <br/><br/>Feel free to browse around and see what I've been up to lately.</strong>
@@ -211,15 +389,29 @@
             <dt><a href="http://phillyconcerthub.com/iphone">Philadelphia Concert Hub for iPhone OS</a></dt>
             <dd>iPhone application for finding concerts in Philadelphia</dd>
 
-            <dt><a href="http://tonyc.tumblr.com">The Scoop</a></dt>
-            <dd>(Rarely updated) Tumblr</dd>
+			<dt><a href="http://youmightlike.it">youmightlike.it</a></dt>
+			<dd>Coming soon</dd>
           </dl>
-          <br/><br/>
-        <h3>Contact</h3>
-          Email/Google Talk: <a href="mailto:tony@endlesswhileloop.com">tony@endlesswhileloop.com</a> 
-      <br/>
-          Twitter: <a href="http://twitter.com/tonyc">@tonyc</a> or <a href="http://twitter.com/phillyconcerts">@PhillyConcerts</a>
+          <br/>
+          <h3>Tumblr</h3>
+          <dl>
+            <dt><a href="/archive">Archive</a></dt>
+            <dt><a href="{RSS}">RSS</a></dt>
+          </dl>
+          <br/>
+		<h3>Elsewhere</h3>
+		<dl>
+			<dt><a href="http://last.fm/user/starnix17">Last.fm</a></dt>
+			<dt><a href="http://twitter.com/tonyc">Twitter</a></dt>
+			<dt><a href="http://hypem.com/tony">Hype Machine</a></dt>
+			<dt><a href="http://github.com/tonycosentini">Github</a></dt>
+			<dt><a href="/contact">Contact Me</a></dt>
+		</dl>
     </div>
+
+	<div class="spacer">
+	  &nbsp;
+	</div>
   </div>
 
 </body>
